@@ -1,6 +1,6 @@
 import { sdk } from '../sdk'
 import { store } from '../fileModels/store.yaml'
-import { runCf } from '../cfRunner'
+import { runCf } from '../utils'
 import { i18n } from '../i18n'
 import { metricsHostId, metricsInterfaceId, metricsPort } from '../interfaces'
 
