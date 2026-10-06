@@ -23,7 +23,6 @@ export default {
     206: 'Se agotó el tiempo de espera de la URL de autorización de Cloudflare. Revisa los registros del servicio.',
 
     // actions/selectTunnel.ts
-    209: 'Un nombre para tu nuevo túnel Cloudflare.',
     210: 'Túnel Cloudflare: No seleccionado',
     211: 'Elige qué túnel Cloudflare usa este servidor. Puedes seleccionar un túnel existente o crear uno nuevo.',
     212: 'Inicia sesión en Cloudflare primero para configurar una zona',
@@ -45,7 +44,7 @@ export default {
     230: 'Agregar nombre de host público',
     231: 'Enruta un nombre de host público de Cloudflare a este servicio',
     232: 'Subdominio',
-    233: 'El subdominio para enrutar a este servicio (p. ej. miapp).',
+    233: 'Si el dominio ya tiene un registro DNS para este nombre, se reemplaza por uno que apunta a este túnel.',
     234: 'Solo subdominio, sin puntos (p. ej. miapp)',
     235: 'Dominio',
     236: 'Inicia sesión en Cloudflare para ver tus dominios',
@@ -80,7 +79,7 @@ export default {
     // actions/importPublicHostnames.ts
     260: 'Importar nombres de host públicos',
     261: 'Escanea los nombres de host públicos existentes en tu túnel Cloudflare y agrega URLs a los servicios instalados coincidentes.',
-    262: 'Esto escaneará los nombres de host públicos existentes del túnel Cloudflare y agregará URLs a los servicios instalados coincidentes.',
+    262: 'Cada nombre de host público del túnel Cloudflare que apunta a un servicio instalado se agrega a las direcciones de ese servicio, y su ruta en Cloudflare se actualiza para llegar al servicio en su dirección actual en este servidor.',
     263: 'No se encontraron nuevos nombres de host públicos en Cloudflare que no estén ya registrados.',
     264: 'Inicia sesión en una zona DNS de Cloudflare de la misma cuenta que el túnel seleccionado y vuelve a intentarlo.',
     268: 'Error al importar desde Cloudflare',
@@ -91,9 +90,9 @@ export default {
     296: '${hostname} (servicio no reconocido: ${service})',
     297: '${hostname} (varias interfaces coincidentes para ${target})',
     298: '${hostname} (no se encontró ninguna interfaz coincidente para ${target})',
-    310: 'Se importó 1 nombre de host público: ${hostnames}',
-    311: 'Se importaron ${count} nombres de host públicos: ${hostnames}',
-    312: 'Omitidos ${count}: ${details}',
+    310: 'Se importó 1 nombre de host público.',
+    311: 'Se importaron ${count} nombres de host públicos.',
+    312: 'Se omitieron ${count} nombres de host públicos.',
     313: 'Se actualizaron las rutas heredadas en Cloudflare.',
 
     // actions/managedOverview.ts
@@ -147,6 +146,10 @@ export default {
     400: 'Configuración',
     401: 'Importar',
     402: 'Información',
+    403: 'Se omitió 1 nombre de host público.',
+    404: 'Importados',
+    405: 'Omitidos',
+    406: 'Actualiza la configuración del túnel Cloudflare: cada nombre de host que gestiona este paquete, y cualquier ruta que aún apunte a una dirección .startos, pasa a apuntar a la dirección actual de su servicio en este servidor.',
   },
   de_DE: {
     // main.ts
@@ -170,7 +173,6 @@ export default {
     206: 'Zeitüberschreitung beim Warten auf die Cloudflare-Autorisierungs-URL. Prüfe die Dienstprotokolle.',
 
     // actions/selectTunnel.ts
-    209: 'Ein Name für Ihren neuen Cloudflare-Tunnel.',
     210: 'Cloudflare-Tunnel: Nicht ausgewählt',
     211: 'Wähle, welchen Cloudflare-Tunnel dieser Server verwendet. Du kannst einen vorhandenen Tunnel auswählen oder einen neuen erstellen.',
     212: 'Melde dich zuerst bei Cloudflare an, um eine Zone zu konfigurieren',
@@ -192,7 +194,7 @@ export default {
     230: 'Öffentlichen Hostnamen hinzufügen',
     231: 'Leitet einen öffentlichen Cloudflare-Hostnamen zu diesem Dienst weiter',
     232: 'Subdomain',
-    233: 'Die Subdomain, die zu diesem Dienst weitergeleitet werden soll (z.B. meinapp).',
+    233: 'Hat die Domain bereits einen DNS-Eintrag für diesen Namen, wird er durch einen ersetzt, der auf diesen Tunnel zeigt.',
     234: 'Nur Subdomain, ohne Punkte (z.B. meinapp)',
     235: 'Domain',
     236: 'Melde dich bei Cloudflare an, um deine Domains zu sehen',
@@ -227,7 +229,7 @@ export default {
     // actions/importPublicHostnames.ts
     260: 'Öffentliche Hostnamen importieren',
     261: 'Scannt vorhandene öffentliche Hostnamen aus deinem Cloudflare-Tunnel und fügt URLs zu passenden installierten Diensten hinzu.',
-    262: 'Dies scannt vorhandene öffentliche Hostnamen aus dem Cloudflare-Tunnel und fügt URLs zu passenden installierten Diensten hinzu.',
+    262: 'Jeder öffentliche Hostname im Cloudflare-Tunnel, der zu einem installierten Dienst führt, wird den Adressen dieses Dienstes hinzugefügt, und seine Route in Cloudflare wird so aktualisiert, dass sie den Dienst unter seiner aktuellen Adresse auf diesem Server erreicht.',
     263: 'Keine neuen öffentlichen Hostnamen in Cloudflare gefunden, die noch nicht erfasst sind.',
     264: 'Melde dich bei einer Cloudflare-DNS-Zone im selben Konto wie der ausgewählte Tunnel an und versuche es erneut.',
     268: 'Cloudflare-Import fehlgeschlagen',
@@ -238,9 +240,9 @@ export default {
     296: '${hostname} (unbekannter Dienst: ${service})',
     297: '${hostname} (mehrere passende Schnittstellen für ${target})',
     298: '${hostname} (keine passende Schnittstelle für ${target} gefunden)',
-    310: '1 öffentlichen Hostnamen importiert: ${hostnames}',
-    311: '${count} öffentliche Hostnamen importiert: ${hostnames}',
-    312: '${count} übersprungen: ${details}',
+    310: '1 öffentlichen Hostnamen importiert.',
+    311: '${count} öffentliche Hostnamen importiert.',
+    312: '${count} öffentliche Hostnamen übersprungen.',
     313: 'Veraltete Routen in Cloudflare aktualisiert.',
 
     // actions/managedOverview.ts
@@ -294,6 +296,10 @@ export default {
     400: 'Konfiguration',
     401: 'Import',
     402: 'Informationen',
+    403: '1 öffentlicher Hostname übersprungen.',
+    404: 'Importiert',
+    405: 'Übersprungen',
+    406: 'Aktualisiert die Konfiguration des Cloudflare-Tunnels: Jeder von diesem Paket verwaltete Hostname und jede Route, die noch auf eine .startos-Adresse zeigt, wird auf die aktuelle Adresse ihres Dienstes auf diesem Server gerichtet.',
   },
   pl_PL: {
     // main.ts
@@ -317,7 +323,6 @@ export default {
     206: 'Upłynął limit czasu oczekiwania na adres URL autoryzacji Cloudflare. Sprawdź dzienniki usługi.',
 
     // actions/selectTunnel.ts
-    209: 'Nazwa dla twojego nowego tunelu Cloudflare.',
     210: 'Tunel Cloudflare: Nie wybrany',
     211: 'Wybierz, którego tunelu Cloudflare używa ten serwer. Możesz wybrać istniejący tunel lub utworzyć nowy.',
     212: 'Najpierw zaloguj się do Cloudflare, aby skonfigurować strefę',
@@ -339,7 +344,7 @@ export default {
     230: 'Dodaj publiczną nazwę hosta',
     231: 'Kieruje publiczną nazwę hosta Cloudflare do tej usługi',
     232: 'Subdomena',
-    233: 'Subdomena do kierowania do tej usługi (np. mojapp).',
+    233: 'Jeśli domena ma już rekord DNS dla tej nazwy, zostanie on zastąpiony rekordem wskazującym na ten tunel.',
     234: 'Tylko subdomena, bez kropek (np. mojapp)',
     235: 'Domena',
     236: 'Zaloguj się do Cloudflare, aby zobaczyć swoje domeny',
@@ -374,7 +379,7 @@ export default {
     // actions/importPublicHostnames.ts
     260: 'Importuj publiczne nazwy hostów',
     261: 'Skanuje istniejące publiczne nazwy hostów z tunelu Cloudflare i dodaje URL-e do pasujących zainstalowanych usług.',
-    262: 'Spowoduje to skanowanie istniejących publicznych nazw hostów z tunelu Cloudflare i dodanie URL-i do pasujących zainstalowanych usług.',
+    262: 'Każda publiczna nazwa hosta w tunelu Cloudflare, która kieruje do zainstalowanej usługi, zostaje dodana do adresów tej usługi, a jej trasa w Cloudflare zostaje zaktualizowana tak, aby docierała do usługi pod jej bieżącym adresem na tym serwerze.',
     263: 'Nie znaleziono nowych publicznych nazw hostów w Cloudflare, które nie są jeszcze śledzone.',
     264: 'Zaloguj się do strefy DNS Cloudflare na tym samym koncie co wybrany tunel, a następnie spróbuj ponownie.',
     268: 'Import z Cloudflare nie powiódł się',
@@ -385,9 +390,9 @@ export default {
     296: '${hostname} (nierozpoznana usługa: ${service})',
     297: '${hostname} (wiele pasujących interfejsów dla ${target})',
     298: '${hostname} (nie znaleziono pasującego interfejsu dla ${target})',
-    310: 'Zaimportowano 1 publiczną nazwę hosta: ${hostnames}',
-    311: 'Zaimportowano ${count} publicznych nazw hostów: ${hostnames}',
-    312: 'Pominięto ${count}: ${details}',
+    310: 'Zaimportowano 1 publiczną nazwę hosta.',
+    311: 'Zaimportowano ${count} publicznych nazw hostów.',
+    312: 'Pominięto ${count} publicznych nazw hostów.',
     313: 'Zaktualizowano starsze trasy w Cloudflare.',
 
     // actions/managedOverview.ts
@@ -441,6 +446,10 @@ export default {
     400: 'Konfiguracja',
     401: 'Import',
     402: 'Informacje',
+    403: 'Pominięto 1 publiczną nazwę hosta.',
+    404: 'Zaimportowane',
+    405: 'Pominięte',
+    406: 'Aktualizuje konfigurację tunelu Cloudflare: każda nazwa hosta zarządzana przez ten pakiet oraz każda trasa wciąż wskazująca na adres .startos zostaje skierowana na bieżący adres swojej usługi na tym serwerze.',
   },
   fr_FR: {
     // main.ts
@@ -464,7 +473,6 @@ export default {
     206: "Délai dépassé en attendant l'URL d'autorisation Cloudflare. Consultez les journaux du service.",
 
     // actions/selectTunnel.ts
-    209: 'Un nom pour votre nouveau tunnel Cloudflare.',
     210: 'Tunnel Cloudflare : Non sélectionné',
     211: 'Choisissez quel tunnel Cloudflare ce serveur utilise. Vous pouvez sélectionner un tunnel existant ou en créer un nouveau.',
     212: "Connectez-vous d'abord à Cloudflare pour configurer une zone",
@@ -486,7 +494,7 @@ export default {
     230: "Ajouter un nom d'hôte public",
     231: "Achemine un nom d'hôte public Cloudflare vers ce service",
     232: 'Sous-domaine',
-    233: 'Le sous-domaine à acheminer vers ce service (ex. monapp).',
+    233: 'Si le domaine possède déjà un enregistrement DNS pour ce nom, il est remplacé par un enregistrement pointant vers ce tunnel.',
     234: 'Sous-domaine uniquement, sans points (ex. monapp)',
     235: 'Domaine',
     236: 'Connectez-vous à Cloudflare pour voir vos domaines',
@@ -521,7 +529,7 @@ export default {
     // actions/importPublicHostnames.ts
     260: "Importer les noms d'hôtes publics",
     261: "Analyse les noms d'hôtes publics existants dans votre tunnel Cloudflare et ajoute des URLs aux services installés correspondants.",
-    262: "Cette action analysera les noms d'hôtes publics existants du tunnel Cloudflare et ajoutera des URLs aux services installés correspondants.",
+    262: "Chaque nom d'hôte public du tunnel Cloudflare qui mène à un service installé est ajouté aux adresses de ce service, et sa route dans Cloudflare est mise à jour pour atteindre le service à son adresse actuelle sur ce serveur.",
     263: "Aucun nouveau nom d'hôte public trouvé dans Cloudflare qui ne soit pas déjà suivi.",
     264: 'Connectez-vous à une zone DNS Cloudflare du même compte que le tunnel sélectionné, puis réessayez.',
     268: "Échec de l'import Cloudflare",
@@ -532,9 +540,9 @@ export default {
     296: '${hostname} (service non reconnu : ${service})',
     297: '${hostname} (plusieurs interfaces correspondantes pour ${target})',
     298: '${hostname} (aucune interface correspondante trouvée pour ${target})',
-    310: "1 nom d'hôte public importé : ${hostnames}",
-    311: "${count} noms d'hôtes publics importés : ${hostnames}",
-    312: '${count} ignoré(s) : ${details}',
+    310: "1 nom d'hôte public importé.",
+    311: "${count} noms d'hôtes publics importés.",
+    312: "${count} noms d'hôtes publics ignorés.",
     313: 'Routes héritées mises à jour dans Cloudflare.',
 
     // actions/managedOverview.ts
@@ -588,5 +596,9 @@ export default {
     400: 'Configuration',
     401: 'Importer',
     402: 'Informations',
+    403: "1 nom d'hôte public ignoré.",
+    404: 'Importés',
+    405: 'Ignorés',
+    406: "Met à jour la configuration du tunnel Cloudflare : chaque nom d'hôte géré par ce paquet, ainsi que toute route qui cible encore une adresse .startos, est dirigé vers l'adresse actuelle de son service sur ce serveur.",
   },
 } satisfies Record<string, LangDict>

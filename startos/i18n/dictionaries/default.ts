@@ -22,7 +22,6 @@ const dict = {
   'Timed out waiting for the Cloudflare authorization URL. Check the service logs.': 206,
 
   // actions/selectTunnel.ts
-  'A name for your new Cloudflare tunnel.': 209,
   'Cloudflare Tunnel: Not selected': 210,
   'Choose which Cloudflare tunnel this server runs. You can select an existing tunnel or create a new one.': 211,
   'Login to Cloudflare first to configure a zone': 212,
@@ -44,7 +43,7 @@ const dict = {
   'Add Public Hostname': 230,
   'Route a public Cloudflare hostname to this service': 231,
   Subdomain: 232,
-  'The subdomain to route to this service (e.g. myapp).': 233,
+  'If the domain already has a DNS record for this name, it is replaced by one pointing at this tunnel.': 233,
   'Subdomain only, no dots (e.g. myapp)': 234,
   Domain: 235,
   'Login to Cloudflare to see your domains': 236,
@@ -79,7 +78,7 @@ const dict = {
   // actions/importPublicHostnames.ts
   'Import Public Hostnames': 260,
   'Scan existing public hostnames from your Cloudflare tunnel and add URLs to matching installed services.': 261,
-  'This will scan existing public hostnames from the Cloudflare tunnel and add URLs to matching installed services.': 262,
+  "Each public hostname in the Cloudflare tunnel that routes to an installed service is added to that service's addresses, and its route in Cloudflare is updated to reach the service at its current address on this server.": 262,
   'No new public hostnames found in Cloudflare that are not already tracked.': 263,
   'Login to a Cloudflare DNS zone in the same account as the selected tunnel, then try again.': 264,
   'Cloudflare Import Failed': 268,
@@ -90,10 +89,13 @@ const dict = {
   '${hostname} (unrecognized service: ${service})': 296,
   '${hostname} (multiple matching interfaces for ${target})': 297,
   '${hostname} (no matching interface found for ${target})': 298,
-  'Imported 1 public hostname: ${hostnames}': 310,
-  'Imported ${count} public hostnames: ${hostnames}': 311,
-  'Skipped ${count}: ${details}': 312,
+  'Imported 1 public hostname.': 310,
+  'Imported ${count} public hostnames.': 311,
+  'Skipped ${count} public hostnames.': 312,
   'Updated legacy routes in Cloudflare.': 313,
+  'Skipped 1 public hostname.': 403,
+  Imported: 404,
+  Skipped: 405,
 
   // actions/managedOverview.ts
   'Managed Public Routes': 270,
@@ -119,6 +121,7 @@ const dict = {
   // actions/repairRoutes.ts and init/setupTasks.ts
   'Repair Cloudflare Routes': 300,
   'Reconnect managed Cloudflare routes to their selected StartOS services.': 301,
+  "Updates the Cloudflare tunnel configuration: each hostname this package manages, and any route still targeting a .startos address, is pointed at its service's current address on this server.": 406,
   'Cloudflare Routes Repaired': 302,
   'There are no managed Cloudflare routes to repair until a tunnel is selected.': 328,
   'Managed Cloudflare routes were updated successfully.': 303,

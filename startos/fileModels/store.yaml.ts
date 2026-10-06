@@ -2,7 +2,7 @@ import { z, FileHelper, T } from '@start9labs/start-sdk'
 import { sdk } from '../sdk'
 
 export const ingressEntryShape = z
-  .object({
+  .looseObject({
     packageId: z
       .union([z.string(), z.null()])
       .transform((value) =>
@@ -22,7 +22,7 @@ export const ingressEntryShape = z
 
 export type IngressEntry = z.infer<typeof ingressEntryShape>
 
-export const tunnelInfoShape = z.object({
+export const tunnelInfoShape = z.looseObject({
   id: z.string(),
   name: z.string(),
   accountId: z.string().catch(''),
@@ -30,7 +30,7 @@ export const tunnelInfoShape = z.object({
 
 export type TunnelInfo = z.infer<typeof tunnelInfoShape>
 
-export const zoneInfoShape = z.object({
+export const zoneInfoShape = z.looseObject({
   zoneId: z.string(),
   zoneName: z.string(),
   accountId: z.string(),
@@ -39,7 +39,7 @@ export const zoneInfoShape = z.object({
 
 export type ZoneInfo = z.infer<typeof zoneInfoShape>
 
-const shape = z.object({
+const shape = z.looseObject({
   tunnel: tunnelInfoShape.nullable().catch(null),
   zones: z.record(z.string(), zoneInfoShape.nullish()).catch({}),
   ingress: z.record(z.string(), ingressEntryShape.nullable()).catch({}),

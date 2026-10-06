@@ -9,7 +9,10 @@ import { IngressEntry, StoreType, store } from '../fileModels/store.yaml'
 import { sdk } from '../sdk'
 import { i18n } from '../i18n'
 
-export type StableIngress = Omit<IngressEntry, 'service'>
+export type StableIngress = Pick<
+  IngressEntry,
+  'packageId' | 'hostId' | 'interfaceId' | 'internalPort' | 'zoneId'
+>
 
 type LegacyServiceTarget = {
   packageId: string
