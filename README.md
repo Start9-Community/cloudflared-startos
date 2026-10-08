@@ -37,11 +37,11 @@
 
 One image, built here rather than pulled: the upstream image is distroless, and this package needs a shell for its login helper and for every one-shot `cloudflared` invocation. The Dockerfile copies the upstream `cloudflared` binary and `ca-certificates` onto a Debian slim base.
 
-| Property      | Value                                                    |
-| ------------- | -------------------------------------------------------- |
-| Image         | Built from `cloudflare/cloudflared` on `debian:*-slim`   |
-| Architectures | x86_64, aarch64 (aarch64 emulated when no native runner) |
-| Command       | `cloudflared … tunnel --credentials-file … run <tunnel>` |
+| Property      | Value                                                               |
+| ------------- | ------------------------------------------------------------------- |
+| Image         | Built from `cloudflare/cloudflared` on `debian:*-slim`              |
+| Architectures | x86_64, aarch64 (other CPUs run an available image under emulation) |
+| Command       | `cloudflared … tunnel --credentials-file … run <tunnel>`            |
 
 | Subcontainer | Purpose                                                                  |
 | ------------ | ------------------------------------------------------------------------ |
@@ -125,15 +125,15 @@ Eight actions. Two are the plugin handshake and are not user-facing; the rest ar
 
 **Cloudflare Tunnel** — run it to pick which tunnel this server runs, or to move to a different one. Creating a new tunnel also creates it on the Cloudflare account. Seconds. Safe to repeat; re-selecting the same tunnel just refetches its credentials. Changes: the store's selected tunnel and the credentials file on disk. The daemon restarts onto the new tunnel.
 
-**Remove DNS Zone** — run it to stop managing a domain. It deletes nothing in Cloudflare: existing DNS records and tunnel routes keep working, they simply stop being tracked here. Instant. Safe to repeat. Changes: drops the zone, its `.pem`, and every route recorded against it from the store.
+**Remove DNS Zone** — run it to stop managing a domain; the zone picker starts empty. It deletes nothing in Cloudflare: existing DNS records and tunnel routes keep working, they simply stop being tracked here. Instant. Safe to repeat. Changes: drops the zone, its `.pem`, and every route recorded against it from the store.
 
-**Import Public Hostnames** — run it when routes already exist on the tunnel (created in the Cloudflare dashboard, or by an older version of this package) and they should appear on their services in StartOS. It reads the live tunnel configuration, adopts every whole-hostname rule that belongs to a configured zone and resolves to an installed service, and rewrites those rules to the current bridge address in one update. Seconds; does not interrupt the tunnel. **Safe to re-run** — already-tracked hostnames are skipped, and a run that adopts nothing changes nothing. It reports what it skipped and why. A rule it cannot resolve unambiguously is left exactly as it is.
+**Import Public Hostnames** — run it when routes already exist on the tunnel (created in the Cloudflare dashboard, or by an older version of this package) and they should appear on their services in StartOS. It reads the live tunnel configuration, adopts every whole-hostname rule that belongs to a configured zone and resolves to an installed service, and rewrites those rules to the current bridge address in one update. Seconds; does not interrupt the tunnel. **Safe to re-run** — already-tracked hostnames are skipped, and a run that adopts nothing changes nothing. It asks for confirmation first, and its result lists the imported hostnames and the skipped ones with the reason for each, one per line. A rule it cannot resolve unambiguously is left exactly as it is.
 
 **Managed Public Routes** — read-only. Run it to see the selected tunnel, each configured zone, and every route this package manages with its public URL and internal target. Instant, no state change. Account and tunnel identifiers are shown; credentials are not.
 
-**Repair Cloudflare Routes** — run it when the repair task appears, after fixing whatever blocked the last reconcile (Cloudflare unreachable, a route edited in the dashboard, a zone removed). It re-resolves every managed route and pushes the result in one update. Seconds. Safe to repeat; on failure it leaves Cloudflare untouched and re-raises the task.
+**Repair Cloudflare Routes** — run it when the repair task appears, after fixing whatever blocked the last reconcile (Cloudflare unreachable, a route edited in the dashboard, a zone removed). It re-resolves every managed route, points any rule still targeting a `.startos` address at its service, and pushes the result in one update, after asking for confirmation. Seconds. Safe to repeat; on failure it leaves Cloudflare untouched and re-raises the task.
 
-**Add Public Hostname** and **Delete Public Hostname** are `visibility: 'hidden'` — **not user-facing.** They are the URL-plugin handshake: StartOS presents them as _Add_ and _Delete_ in the Cloudflare Tunnel section of _another_ service's address list, and fills in a hidden input identifying that service's interface. Never direct a user to run them from this package's page; they cannot be run there.
+**Add Public Hostname** and **Delete Public Hostname** are `visibility: 'hidden'` — **not user-facing.** They are the URL-plugin handshake: StartOS presents them as _Add_ and _Delete_ in the Cloudflare Tunnel section of _another_ service's address list, and fills in a hidden input identifying that service's interface. Never direct a user to run them from this package's page; they cannot be run there. Add creates the DNS record with `--overwrite-dns`, so an existing record for that hostname is replaced; the Subdomain field says so.
 
 Every route mutation reads the complete live tunnel configuration first, changes only the hostnames this package owns, and writes the whole object back — so rules created in the Cloudflare dashboard, path-scoped rules, and per-route origin settings are preserved. If the live rule for a hostname no longer matches what the store recorded, the update is refused rather than resolved by guessing.
 

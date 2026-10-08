@@ -42,9 +42,8 @@ export const manifest = setupManifest({
         },
       },
       arch: ['x86_64', 'aarch64'],
-      emulateMissingAs: 'aarch64',
+      emulateMissing: true,
     },
   },
-  dependencies: {},
   plugins: ['url-v0'],
 })

@@ -1,3 +1,4 @@
+import { T } from '@start9labs/start-sdk'
 import { sdk } from '../sdk'
 import { store } from '../fileModels/store.yaml'
 import {
@@ -27,7 +28,7 @@ export const importPublicHostnames = sdk.Action.withoutInput(
       'Scan existing public hostnames from your Cloudflare tunnel and add URLs to matching installed services.',
     ),
     warning: i18n(
-      'This will scan existing public hostnames from the Cloudflare tunnel and add URLs to matching installed services.',
+      "Each public hostname in the Cloudflare tunnel that routes to an installed service is added to that service's addresses, and its route in Cloudflare is updated to reach the service at its current address on this server.",
     ),
     allowedStatuses: 'any',
     group: i18n('Import'),
@@ -313,36 +314,52 @@ export const importPublicHostnames = sdk.Action.withoutInput(
     }
 
     const lines: string[] = []
-    if (imported > 0)
+    const report: T.ActionResultMember[] = []
+    if (imported > 0) {
       lines.push(
         i18n(
           imported === 1
-            ? 'Imported 1 public hostname: ${hostnames}'
-            : 'Imported ${count} public hostnames: ${hostnames}',
-          {
-            count: imported,
-            hostnames: Object.keys(ingressUpdates).join(', '),
-          },
+            ? 'Imported 1 public hostname.'
+            : 'Imported ${count} public hostnames.',
+          { count: imported },
         ),
       )
-    if (skipped.length > 0)
+      report.push({
+        type: 'multiline',
+        name: i18n('Imported'),
+        description: null,
+        value: Object.keys(ingressUpdates).join('\n'),
+        copyable: true,
+      })
+    }
+    if (skipped.length > 0) {
       lines.push(
-        i18n('Skipped ${count}: ${details}', {
-          count: skipped.length,
-          details: skipped.join('; '),
-        }),
+        i18n(
+          skipped.length === 1
+            ? 'Skipped 1 public hostname.'
+            : 'Skipped ${count} public hostnames.',
+          { count: skipped.length },
+        ),
       )
+      report.push({
+        type: 'multiline',
+        name: i18n('Skipped'),
+        description: null,
+        value: skipped.join('\n'),
+        copyable: true,
+      })
+    }
     if (reconciled) lines.push(i18n('Updated legacy routes in Cloudflare.'))
 
     return {
       version: '1',
       title: i18n('Import Public Hostnames'),
       message:
-        lines.join('\n') ||
+        lines.join(' ') ||
         i18n(
           'No new public hostnames found in Cloudflare that are not already tracked.',
         ),
-      result: null,
+      result: report.length ? { type: 'group', value: report } : null,
     }
   },
 )

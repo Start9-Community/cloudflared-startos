@@ -42,7 +42,9 @@ const inputSpec = InputSpec.of({
   }>(),
   subdomain: Value.text({
     name: i18n('Subdomain'),
-    description: i18n('The subdomain to route to this service (e.g. myapp).'),
+    description: i18n(
+      'If the domain already has a DNS record for this name, it is replaced by one pointing at this tunnel.',
+    ),
     required: true,
     default: null,
     placeholder: 'myapp',
@@ -260,8 +262,7 @@ export const addPublicHostname = sdk.Action.withInput(
               tunnelId,
               hostname,
             ],
-            {},
-            30_000,
+            { timeout: 30_000 },
           )
           if (result.stdout) console.info(result.stdout)
           if (result.stderr) console.info(result.stderr)

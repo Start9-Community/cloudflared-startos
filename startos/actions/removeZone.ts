@@ -49,7 +49,7 @@ export const removeZone = sdk.Action.withInput(
       }
       return {
         name: i18n('Zone'),
-        default: Object.keys(variants)[0],
+        default: null,
         disabled: false,
         variants: Variants.of(variants),
       }

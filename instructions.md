@@ -30,7 +30,7 @@ To manage a second domain, run **Add DNS Zone** (the login action takes this nam
 
 1. Open the service you want to reach publicly and go to the address list for the interface you want to expose.
 2. In the **Cloudflare Tunnel** section, choose **Add**.
-3. Enter a subdomain and pick which of your domains to put it under.
+3. Enter a subdomain and pick which of your domains to put it under. If that domain already has a DNS record for the name, it is replaced.
 4. The address appears in the list, and Cloudflare starts routing to it.
 
 To take an address down, use the overflow menu on its row and choose **Delete**. Both the tunnel route and the DNS record are removed.
@@ -42,7 +42,7 @@ If the DNS record could not be created automatically, the result tells you exact
 - **Login to Cloudflare** / **Add DNS Zone** — authorize a domain. Run it once per domain.
 - **Cloudflare Tunnel** — choose or create the tunnel this server runs.
 - **Remove DNS Zone** — stop managing a domain here. Its records and routes in Cloudflare are not deleted, so anything already working keeps working.
-- **Import Public Hostnames** — adopt addresses that already exist on the tunnel, so they show up on their services here and are managed from then on. Safe to run any time; it skips anything it already tracks and tells you what it left alone.
+- **Import Public Hostnames** — adopt addresses that already exist on the tunnel, so they show up on their services here and are managed from then on. Safe to run any time; it skips anything it already tracks and lists what it imported and what it left alone.
 - **Managed Public Routes** — see the tunnel, the domains, and every address managed here, with what each one points at.
 - **Repair Cloudflare Routes** — retry after a failed update. Run it once you've fixed what went wrong.
 

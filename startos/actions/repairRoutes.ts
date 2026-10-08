@@ -9,7 +9,9 @@ export const repairRoutes = sdk.Action.withoutInput(
     description: i18n(
       'Reconnect managed Cloudflare routes to their selected StartOS services.',
     ),
-    warning: null,
+    warning: i18n(
+      "Updates the Cloudflare tunnel configuration: each hostname this package manages, and any route still targeting a .startos address, is pointed at its service's current address on this server.",
+    ),
     allowedStatuses: 'any',
     group: i18n('Configuration'),
     visibility: 'enabled',

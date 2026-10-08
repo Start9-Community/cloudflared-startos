@@ -1,4 +1,5 @@
 import { sdk } from '../sdk'
+import { dependencies } from '../dependencies'
 import { setInterfaces } from '../interfaces'
 import { versionGraph } from '../versions'
 import { actions } from '../actions'
@@ -16,6 +17,7 @@ export const init = sdk.setupInit(
   setupZones,
   setInterfaces,
   actions,
+  dependencies,
   registerUrlPlugin,
   reconcileIngress,
   setupTasks,

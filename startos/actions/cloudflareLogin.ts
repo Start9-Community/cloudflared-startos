@@ -53,15 +53,12 @@ export const cloudflareLogin = sdk.Action.withoutInput(
       mounts,
       'cf-login',
       async (sub) => {
-        const result = await sub.exec(
-          ['/usr/local/bin/cf-login.sh'],
-          {
-            env: {
-              LOGIN_SESSION_ID: sessionId,
-            },
+        const result = await sub.exec(['/usr/local/bin/cf-login.sh'], {
+          env: {
+            LOGIN_SESSION_ID: sessionId,
           },
-          10 * 60 * 1000 + 35_000,
-        )
+          timeout: 10 * 60 * 1000 + 35_000,
+        })
         if (result.stdout) console.info(result.stdout)
         if (result.stderr) console.info(result.stderr)
         if (result.exitCode !== 0) {

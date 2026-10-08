@@ -41,7 +41,7 @@ const newTunnelSpec = (serverName: string | null) =>
   InputSpec.of({
     name: Value.text({
       name: i18n('Tunnel Name'),
-      description: i18n('A name for your new Cloudflare tunnel.'),
+      description: null,
       required: true,
       default: serverName,
       placeholder: 'my-server',

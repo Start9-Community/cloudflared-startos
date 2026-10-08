@@ -41,8 +41,7 @@ export async function runCf(
     async (sub) => {
       const result = await sub.exec(
         ['/usr/local/bin/cloudflared', '--no-autoupdate', ...certArgs, ...args],
-        {},
-        timeoutMs,
+        { timeout: timeoutMs },
       )
       if (result.stderr) console.info(result.stderr)
       if (result.exitCode !== 0) {
