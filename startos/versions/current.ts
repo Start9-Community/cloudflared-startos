@@ -1,18 +1,18 @@
 import { IMPOSSIBLE, VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '2026.10.3:1',
+  version: '2026.10.7:0',
   releaseNotes: {
     en_US:
-      'Managed Cloudflare routes now follow changes to a service’s assigned port automatically, without restarting the tunnel. Routes added while Cloudflare Tunnel is running are watched too.',
+      'Updated cloudflared to 2026.10.7, fixing HTTP/2 concurrency limits and QUIC metrics, restricting metrics-server debug endpoints, and updating security-sensitive dependencies. Full upstream changes: https://github.com/cloudflare/cloudflared/compare/2026.10.3...2026.10.7',
     es_ES:
-      'Las rutas de Cloudflare gestionadas ahora siguen automáticamente los cambios del puerto asignado a un servicio, sin reiniciar el túnel. También se supervisan las rutas añadidas mientras Cloudflare Tunnel está en ejecución.',
+      'Actualizado cloudflared a 2026.10.7, con correcciones de los límites de concurrencia HTTP/2 y las métricas QUIC, restricciones de los puntos de depuración del servidor de métricas y actualizaciones de dependencias sensibles para la seguridad. Todos los cambios: https://github.com/cloudflare/cloudflared/compare/2026.10.3...2026.10.7',
     de_DE:
-      'Verwaltete Cloudflare-Routen folgen Änderungen am zugewiesenen Port eines Dienstes jetzt automatisch, ohne den Tunnel neu zu starten. Auch Routen, die während des Betriebs von Cloudflare Tunnel hinzugefügt werden, werden überwacht.',
+      'cloudflared auf 2026.10.7 aktualisiert: HTTP/2-Parallelitätsgrenzen und QUIC-Metriken korrigiert, Debug-Endpunkte des Metrikservers eingeschränkt und sicherheitsrelevante Abhängigkeiten aktualisiert. Alle Änderungen: https://github.com/cloudflare/cloudflared/compare/2026.10.3...2026.10.7',
     pl_PL:
-      'Zarządzane trasy Cloudflare automatycznie śledzą zmiany portu przypisanego do usługi, bez ponownego uruchamiania tunelu. Monitorowane są także trasy dodane podczas działania Cloudflare Tunnel.',
+      'Zaktualizowano cloudflared do 2026.10.7, poprawiając limity współbieżności HTTP/2 i metryki QUIC, ograniczając dostęp do punktów debugowania serwera metryk oraz aktualizując zależności istotne dla bezpieczeństwa. Wszystkie zmiany: https://github.com/cloudflare/cloudflared/compare/2026.10.3...2026.10.7',
     fr_FR:
-      'Les routes Cloudflare gérées suivent désormais automatiquement les changements du port attribué à un service, sans redémarrer le tunnel. Les routes ajoutées pendant le fonctionnement de Cloudflare Tunnel sont également surveillées.',
+      'Mise à jour de cloudflared vers 2026.10.7 : correction des limites de concurrence HTTP/2 et des métriques QUIC, restriction des points de débogage du serveur de métriques et mise à jour des dépendances sensibles pour la sécurité. Tous les changements : https://github.com/cloudflare/cloudflared/compare/2026.10.3...2026.10.7',
   },
   migrations: {
     up: async ({ effects }) => {},
@@ -20,4 +20,4 @@ export const current = VersionInfo.of({
   },
 })
 
-export const CLOUDFLARED_VERSION = '2026.10.3'
+export const CLOUDFLARED_VERSION = '2026.10.7'
